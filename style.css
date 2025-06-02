@@ -1,0 +1,46 @@
+
+
+    #svgMap {
+      width: 100%;
+      height: auto;
+      display: block; /* removes whitespace below object */
+    }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f0f0f0;
+  font-family: system-ui, Arial, sans-serif;
+}
+
+.controls {
+  margin: 20px 0;
+}
+
+select {
+  padding: 8px 12px;
+  font-size: 16px;
+  width: 220px;
+  margin-right: 12px;
+}
+
+.map-frame {
+  width: 90vw;
+  height: 80vh;
+  border: 2px solid #ccc;
+  padding: 20px;
+  background: #fff;
+  box-sizing: border-box;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+#svgMap {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
