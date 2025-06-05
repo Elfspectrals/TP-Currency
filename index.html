@@ -2,16 +2,22 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Convertisseur de devises</title>
+  <title>Convertisseur de devises – Touristic Vibe</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <object id="svgMap" type="image/svg+xml" data="world.svg"></object>
   <div class="controls">
-    <label for="sourceCurrencySelect">Devise source :</label>
-    <select id="sourceCurrencySelect"></select>
-    <label for="targetCurrencySelect">Devise cible :</label>
-    <select id="targetCurrencySelect"></select>
+    <div class="selection-info">
+      <div class="country-box">
+        <div class="country-label">Pays 1 :</div>
+        <div id="firstCountryName" class="country-name">Aucun</div>
+      </div>
+      <div class="country-box">
+        <div class="country-label">Pays 2 :</div>
+        <div id="secondCountryName" class="country-name">Aucun</div>
+      </div>
+    </div>
     <input type="number" id="amountInput" placeholder="Montant à convertir" />
   </div>
   <script src="script.js"></script>

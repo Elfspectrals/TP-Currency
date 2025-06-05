@@ -1,8 +1,3 @@
-#svgMap {
-  width: 100%;
-  height: auto;
-  display: block;
-}
 
 html,
 body {
@@ -12,40 +7,89 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #f0f0f0;
-  font-family: system-ui, Arial, sans-serif;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+#svgMap {
+  width: 100%;
+  height: 65%;
+  display: block;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  margin-top: 20px;
 }
 
 .controls {
   margin: 20px 0;
   display: flex;
-  gap: 12px;
+  flex-direction: column;
   align-items: center;
+  gap: 12px;
+  width: 90%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-select {
-  padding: 6px 10px;
+.selection-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 24px;
+}
+
+.country-box {
+  flex: 1;
+  text-align: center;
+  background: #fff5ee;
+  border: 1px solid #f1c0a2;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.country-label {
   font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #a34431;
+}
+
+.country-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #d3421b;
 }
 
 #amountInput {
-  padding: 6px 10px;
-  font-size: 14px;
-  width: 160px;
-}
-
-.map-frame {
-  width: 90vw;
-  height: 80vh;
-  border: 2px solid #ccc;
-  padding: 20px;
-  background: #fff;
-  box-sizing: border-box;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-}
-
-#svgMap {
+  padding: 10px 14px;
+  font-size: 16px;
   width: 100%;
-  height: 75%;
-  display: block;
+  max-width: 300px;
+  border: 2px solid #f1c0a2;
+  border-radius: 8px;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s;
+}
+
+#amountInput:focus {
+  border-color: #d3421b;
+}
+
+#conversionResult {
+  margin-top: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px 14px;
+  background: #fff0eb;
+  border-radius: 8px;
+  border: 1px solid #f1c0a2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  color: #a34431;
 }

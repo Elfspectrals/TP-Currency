@@ -1,53 +1,39 @@
+// script.js
+
 const API_KEY = "9e549d15494da693c6d190fb";
 const API_CONVERT_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/pair`;
-const API_CODES_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/codes`;
 
 let firstSelection = null;
 let secondSelection = null;
 
-async function initialize() {
-  const sourceSelect = document.getElementById("sourceCurrencySelect");
-  const targetSelect = document.getElementById("targetCurrencySelect");
-  const amountInput = document.getElementById("amountInput");
+function selectTwoCountries() {
   const svgObject = document.getElementById("svgMap");
-
-  const respCodes = await fetch(API_CODES_URL);
-  const jsonCodes = await respCodes.json();
-  const codes = jsonCodes.supported_codes || [];
-  codes.forEach(([code, name]) => {
-    const option1 = document.createElement("option");
-    option1.value = code;
-    option1.textContent = `${code} - ${name}`;
-    sourceSelect.appendChild(option1);
-    const option2 = document.createElement("option");
-    option2.value = code;
-    option2.textContent = `${code} - ${name}`;
-    targetSelect.appendChild(option2);
-  });
+  const amountInput = document.getElementById("amountInput");
+  const firstNameEl = document.getElementById("firstCountryName");
+  const secondNameEl = document.getElementById("secondCountryName");
 
   svgObject.addEventListener("load", () => {
     const svgDoc = svgObject.contentDocument;
     const svgPaths = svgDoc.querySelectorAll("path");
+
     svgPaths.forEach((path) => {
       const rawId = path.getAttribute("id") || path.getAttribute("class");
       const rawName = path.getAttribute("name") || path.getAttribute("class");
       if (!rawId || !rawName) return;
       const countryId = rawId.toUpperCase();
       const countryName = rawName;
+
       path.addEventListener("click", async () => {
-        await handleCountryClick(countryId, countryName, path, svgPaths);
+        handleCountryClick(countryId, countryName, path, svgPaths);
+        // Met à jour l'affichage des noms
+        firstNameEl.textContent = firstSelection ? firstSelection.name : "Aucun";
+        secondNameEl.textContent = secondSelection ? secondSelection.name : "Aucun";
       });
     });
-  });
 
-  amountInput.addEventListener("input", () => {
-    updateConversion();
-  });
-  sourceSelect.addEventListener("change", () => {
-    updateConversion();
-  });
-  targetSelect.addEventListener("change", () => {
-    updateConversion();
+    amountInput.addEventListener("input", () => {
+      updateConversion();
+    });
   });
 }
 
@@ -71,7 +57,6 @@ async function handleCountryClick(countryId, countryName, path, allPaths) {
     path.style.fill = "red";
     try {
       firstSelection.currency = await fetchCurrency(countryId, countryName);
-      document.getElementById("sourceCurrencySelect").value = firstSelection.currency;
     } catch {
       firstSelection.currency = null;
     }
@@ -81,7 +66,6 @@ async function handleCountryClick(countryId, countryName, path, allPaths) {
     path.style.fill = "blue";
     try {
       secondSelection.currency = await fetchCurrency(countryId, countryName);
-      document.getElementById("targetCurrencySelect").value = secondSelection.currency;
     } catch {
       secondSelection.currency = null;
     }
@@ -93,7 +77,6 @@ async function handleCountryClick(countryId, countryName, path, allPaths) {
     path.style.fill = "red";
     try {
       firstSelection.currency = await fetchCurrency(countryId, countryName);
-      document.getElementById("sourceCurrencySelect").value = firstSelection.currency;
     } catch {
       firstSelection.currency = null;
     }
@@ -103,19 +86,21 @@ async function handleCountryClick(countryId, countryName, path, allPaths) {
 
 async function updateConversion() {
   const amountInput = document.getElementById("amountInput");
-  const sourceSelect = document.getElementById("sourceCurrencySelect");
-  const targetSelect = document.getElementById("targetCurrencySelect");
   const value = parseFloat(amountInput.value);
-  const sourceCode = sourceSelect.value;
-  const targetCode = targetSelect.value;
-  if (!sourceCode || !targetCode || isNaN(value)) {
+  if (
+    !firstSelection ||
+    !secondSelection ||
+    !firstSelection.currency ||
+    !secondSelection.currency ||
+    isNaN(value)
+  ) {
     clearConversion();
     return;
   }
   try {
-    const rate = await fetchExchangeRate(sourceCode, targetCode);
+    const rate = await fetchExchangeRate(firstSelection.currency, secondSelection.currency);
     const converted = (value * rate).toLocaleString("fr-FR", { maximumFractionDigits: 2 });
-    showConversion(`${value.toLocaleString("fr-FR")} ${sourceCode} = ${converted} ${targetCode}`);
+    showConversion(`${value.toLocaleString("fr-FR")} ${firstSelection.currency} = ${converted} ${secondSelection.currency}`);
   } catch {
     showConversion("Impossible de comparer les devises.");
   }
@@ -132,9 +117,6 @@ function showConversion(message) {
   clearConversion();
   const output = document.createElement("div");
   output.id = "conversionResult";
-  output.style.marginTop = "20px";
-  output.style.fontSize = "18px";
-  output.style.fontWeight = "bold";
   output.textContent = message;
   document.body.appendChild(output);
 }
@@ -174,4 +156,4 @@ async function fetchExchangeRate(baseCurrency, targetCurrency) {
   return json.conversion_rate;
 }
 
-initialize();
+selectTwoCountries();
