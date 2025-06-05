@@ -156,4 +156,8 @@ async function fetchExchangeRate(baseCurrency, targetCurrency) {
   return json.conversion_rate;
 }
 
+
+addEventListener("DOMContentLoaded", () => {
+    alert("Pour sélectionner une devise cliquez, sur les pays directement.");
+    })
 selectTwoCountries();
