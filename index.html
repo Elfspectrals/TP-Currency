@@ -2,24 +2,24 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Convertisseur de devises</title>
+  <title>Convertisseur de devises – Touristic Vibe</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Convertisseur de devises</h1>
-
-  <label for="amount">Montant :</label>
-  <input type="number" id="amount" placeholder="Entrez le montant" min="0" step="1" />
-
-  <br><br>
-
-  <label for="from-currency">De :</label>
-  <select id="from-currency"></select>
-
-  <label for="to-currency">À :</label>
-  <select id="to-currency"></select>
-
-  <p id="result"></p>
-
+  <object id="svgMap" type="image/svg+xml" data="world.svg"></object>
+  <div class="controls">
+    <div class="selection-info">
+      <div class="country-box">
+        <div class="country-label">Pays 1 :</div>
+        <div id="firstCountryName" class="country-name">Aucun</div>
+      </div>
+      <div class="country-box">
+        <div class="country-label">Pays 2 :</div>
+        <div id="secondCountryName" class="country-name">Aucun</div>
+      </div>
+    </div>
+    <input type="number" id="amountInput" placeholder="Montant à convertir" />
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
