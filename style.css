@@ -24,15 +24,14 @@ body {
 }
 
 select {
-  padding: 8px 12px;
-  font-size: 16px;
-  width: 220px;
+  padding: 6px 10px;
+  font-size: 14px;
 }
 
 #amountInput {
-  padding: 8px 12px;
-  font-size: 16px;
-  width: 180px;
+  padding: 6px 10px;
+  font-size: 14px;
+  width: 160px;
 }
 
 .map-frame {
@@ -47,6 +46,6 @@ select {
 
 #svgMap {
   width: 100%;
-  height: 100%;
+  height: 75%;
   display: block;
 }
